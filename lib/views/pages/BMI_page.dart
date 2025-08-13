@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/pages/result_page.dart';
 import 'package:demo/views/widgets/gender_select.dart';
 import 'package:demo/views/widgets/height_slider.dart';
 import 'package:demo/views/widgets/num_box.dart';
@@ -8,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // BMI Formula
-void CalculateBMI(){
-    bmi.value = (weight.value) / ((height.value / 100) * (height.value / 100));
+void CalculateBMI() {
+  bmi.value = (weight.value) / ((height.value / 100) * (height.value / 100));
 }
 
 class BmiPage extends StatelessWidget {
@@ -30,7 +31,6 @@ class BmiPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             // Weight
             ValueListenableBuilder(
               valueListenable: weight,
@@ -59,7 +59,7 @@ class BmiPage extends StatelessWidget {
                           Text('kg'),
                         ],
                       ),
-                      
+
                       // Text Field Container
                       SizedBox(height: 10),
                       SizedBox(
@@ -74,7 +74,7 @@ class BmiPage extends StatelessWidget {
                               ],
                               onChanged: (value) {
                                 double? val = double.tryParse(value);
-                                if(val != null){
+                                if (val != null) {
                                   weight.value = val;
                                 }
                               },
@@ -87,7 +87,7 @@ class BmiPage extends StatelessWidget {
                                 hintText: 'Enter your weight',
                                 hintStyle: TextStyle(
                                   fontSize: 8,
-                                  color: Colors.grey,
+                                  color: Colors.grey.shade700,
                                   fontWeight: FontWeight.normal,
                                 ),
                                 border: OutlineInputBorder(
@@ -122,7 +122,7 @@ class BmiPage extends StatelessWidget {
                     ],
                   ),
                 );
-              }
+              },
             ),
             SizedBox(width: 20),
 
@@ -134,7 +134,10 @@ class BmiPage extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(height: 10),
-                      Text('A g e', style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text(
+                        'A g e',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -162,7 +165,10 @@ class BmiPage extends StatelessWidget {
                             },
                             child: Text(
                               '—',
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                           SizedBox(width: 10),
@@ -173,7 +179,10 @@ class BmiPage extends StatelessWidget {
                             },
                             child: Text(
                               '+',
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ],
@@ -181,7 +190,7 @@ class BmiPage extends StatelessWidget {
                     ],
                   ),
                 );
-              }
+              },
             ),
           ],
         ),
@@ -198,22 +207,34 @@ class BmiPage extends StatelessWidget {
                   backgroundColor: Colors.amber.shade100,
                   minimumSize: Size(200, 80),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(12)
-                  )
+                    borderRadius: BorderRadiusGeometry.circular(12),
+                  ),
                 ),
                 onPressed: () {
                   CalculateBMI();
                   print(bmi.value);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ResultPage();
+                      },
+                    ),
+                  );
                 },
                 child: Center(
                   child: Text(
                     'C a c u l a t e',
-                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
             );
-          }
+          },
         ),
       ],
     );

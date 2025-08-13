@@ -1,6 +1,7 @@
 import 'package:demo/data/notifer.dart';
-import 'package:demo/views/pages/BMI_page.dart';
-import 'package:demo/views/pages/History_page.dart';
+import 'package:demo/views/pages/bmi_page.dart';
+import 'package:demo/views/pages/history_page.dart';
+import 'package:demo/views/pages/result_page.dart';
 import 'package:demo/views/widgets/navbar_widget.dart';
 import 'package:flutter/material.dart';
 List<Widget> pages = [BmiPage(), HistoryPage()];
@@ -20,7 +21,6 @@ class WidgetTree extends StatelessWidget {
             return Text(
               (pageIndex == 0) ? 'B M I   C A L C U L A T O R' : 'H I S T O R Y',
               style: TextStyle(
-                fontWeight: FontWeight.bold,
                 shadows: [
                   Shadow(
                     offset: Offset(2, 2),
