@@ -9,7 +9,7 @@ class GaugeChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 450,
-      height: 320,
+      height: 347,
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
@@ -17,26 +17,30 @@ class GaugeChart extends StatelessWidget {
         ),
         color: Color(0XFFdde7c7),
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 10),
           child: Center(
-            heightFactor: 100,
-            child: PrettyGauge(
-              minValue: 0,
-              maxValue: 50,
-              needleColor: Color(0XFF0081a7),
-              currentValue: bmi.value,
-              gaugeSize: 300,
-              showMarkers: false,
-              valueWidget: Text(
-                ((bmi.value > 50) ? 50 : bmi.value).toStringAsFixed(1),
-                style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold, color: Color(0XFF001427)),
-              ),
-              segments: [
-                GaugeSegment('Underweight', 18.4, Color(0xFF264653)), // < 18.5
-                GaugeSegment('Normal', 6.5, Color(0XFF2a9d8f)), // 18.5 to 24.9
-                GaugeSegment('Overweight', 5, Color(0XFFe9c46a)), // 25 to 29.9
-                GaugeSegment('Obese', 9.9, Color(0XFFf4a261)), // 30 to 39.9
-                GaugeSegment('Morbidly Obese', 10.2, Color(0XFFe76f51)), // > 40
+            child: Column(
+              children: [
+                Text('Y o u r  S c o r e',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                PrettyGauge(
+                  minValue: 0,
+                  maxValue: 50,
+                  needleColor: Color(0XFF0081a7),
+                  currentValue: (bmi.value > 50) ? 50 : bmi.value,
+                  gaugeSize: 300,
+                  showMarkers: false,
+                  valueWidget: Text(
+                    bmi.value.toStringAsFixed(1),
+                    style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold, color: Color(0XFF001427)),
+                  ),
+                  segments: [
+                    GaugeSegment('Underweight', 18.4, Color(0xFF264653)), // < 18.5
+                    GaugeSegment('Normal', 6.5, Color(0XFF2a9d8f)), // 18.5 to 24.9
+                    GaugeSegment('Overweight', 5, Color(0XFFe9c46a)), // 25 to 29.9
+                    GaugeSegment('Obese', 9.9, Color(0XFFf4a261)), // 30 to 39.9
+                    GaugeSegment('Morbidly Obese', 10.2, Color(0XFFe76f51)), // > 40
+                  ],
+                ),
               ],
             ),
           ),

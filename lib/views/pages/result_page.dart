@@ -1,8 +1,11 @@
 import 'dart:math';
 
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/widgets/stat_attempt.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/views/widgets/gauge_chart.dart';
+
+
 
 class ResultPage extends StatelessWidget {
   const ResultPage({super.key});
@@ -17,16 +20,23 @@ class ResultPage extends StatelessWidget {
         toolbarHeight: 80,
         leadingWidth: 100,
         leading: TextButton.icon(
-          label: Text('Back', style: TextStyle(fontSize: 15),),
+          label: Text('Back', style: TextStyle(fontSize: 15)),
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Icon(Icons.arrow_back_ios_new_rounded),
         ),
-        title: Text('R E S U L T', style: TextStyle( fontSize: 30)),
+        title: Text('R E S U L T', style: TextStyle(fontSize: 30)),
         centerTitle: true,
       ),
-      body: Center(child: GaugeChart())
+      body: Column(
+        children: [
+          SizedBox(height: 10),
+          StatusAndAttempt(),
+          SizedBox(height: 30),
+          Center(child: GaugeChart()),
+        ],
+      ),
     );
   }
 }

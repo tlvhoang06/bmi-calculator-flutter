@@ -1,6 +1,6 @@
-import 'dart:ui';
 
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/functions/function.dart';
 import 'package:demo/views/pages/result_page.dart';
 import 'package:demo/views/widgets/gender_select.dart';
 import 'package:demo/views/widgets/height_slider.dart';
@@ -8,10 +8,7 @@ import 'package:demo/views/widgets/num_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// BMI Formula
-void CalculateBMI() {
-  bmi.value = (weight.value) / ((height.value / 100) * (height.value / 100));
-}
+
 
 class BmiPage extends StatelessWidget {
   const BmiPage({super.key});
@@ -84,9 +81,9 @@ class BmiPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                               decoration: InputDecoration(
-                                hintText: 'Enter your weight',
+                                hintText: 'Enter here',
                                 hintStyle: TextStyle(
-                                  fontSize: 8,
+                                  fontSize: 15,
                                   color: Colors.grey.shade700,
                                   fontWeight: FontWeight.normal,
                                 ),
@@ -212,7 +209,6 @@ class BmiPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   CalculateBMI();
-                  print(bmi.value);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
