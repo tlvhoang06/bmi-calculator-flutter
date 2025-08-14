@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:demo/data/notifer.dart';
 import 'package:flutter/material.dart';
-import 'package:demo/views/widgets/chart.dart'; // Thêm dòng này
+import 'package:demo/views/widgets/gauge_chart.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({super.key});
@@ -12,7 +12,7 @@ class ResultPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: (isDarkMode.value)
           ? Colors.blueGrey.shade900
-          : Colors.teal.shade50,
+          : Color(0XFFedeec9),
       appBar: AppBar(
         toolbarHeight: 80,
         leadingWidth: 100,
@@ -26,7 +26,7 @@ class ResultPage extends StatelessWidget {
         title: Text('R E S U L T', style: TextStyle( fontSize: 30)),
         centerTitle: true,
       ),
-      body: Chart()
+      body: Center(child: GaugeChart())
     );
   }
 }
