@@ -21,6 +21,7 @@ class StatusAndAttempt extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(height: 10),
                 Text(
                   Result(bmi.value),
                   style: TextStyle(
@@ -30,9 +31,23 @@ class StatusAndAttempt extends StatelessWidget {
                   ),
                 ),
                 Text(
+                  BmiCompliment(bmi.value),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0XFF001427),
+                  ),
+                ),
+                SizedBox(height: 15),
+                Text(
                   (18.5 <= bmi.value && bmi.value <= 24.9)
                       ? 'Your weight is in the healthy range - maintain it!'
-                      : 'You need to ${(bmi.value <= 24.9) ? 'gain' : 'lose'} ${WeightToChange(bmi.value, bmi.value > 24.9)} kg',
+                      : 'You need to ${(bmi.value <= 24.9) ? 'gain' : 'lose'} around ${WeightToChange(bmi.value, bmi.value > 24.9).abs().ceilToDouble()} kg',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0XFF001427),
+                  ),
                 ),
               ],
             ),
