@@ -38,8 +38,8 @@ class HeightSlider extends StatelessWidget {
                   ),
                   Slider(
                     min: 30.0,
-                    max: 260,
-                    divisions: 520,
+                    max: 240,
+                    divisions: 420,
                     value: sliderValue,
                     onChanged: (value) {
                       height.value = value;

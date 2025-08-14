@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:demo/data/notifer.dart';
 import 'package:flutter/material.dart';
+import 'package:demo/views/widgets/chart.dart'; // Thêm dòng này
 
 class ResultPage extends StatelessWidget {
   const ResultPage({super.key});
@@ -25,9 +26,7 @@ class ResultPage extends StatelessWidget {
         title: Text('R E S U L T', style: TextStyle( fontSize: 30)),
         centerTitle: true,
       ),
-      body: Column(
-        
-      ),
+      body: Chart()
     );
   }
 }
