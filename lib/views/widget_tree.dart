@@ -12,7 +12,7 @@ class WidgetTree extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80.0,
-        backgroundColor: Colors.teal.shade300,
+        backgroundColor: Color(0XFFb8f2e6),
         centerTitle: true,
         title: ValueListenableBuilder(
           valueListenable: selectedPage,

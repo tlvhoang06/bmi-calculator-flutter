@@ -29,7 +29,7 @@ class ResultPage extends StatelessWidget {
               fontSize: 40,
               fontWeight: FontWeight.w500,
               letterSpacing: 6,
-              color: Color(0XFF042a2b),
+              color:  isDarkMode.value ? Color(0XFFc0fdff) : Color(0XFF042a2b),
             ),
           ),
           SizedBox(height: 20),
