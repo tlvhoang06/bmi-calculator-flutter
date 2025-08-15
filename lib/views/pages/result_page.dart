@@ -5,8 +5,6 @@ import 'package:demo/views/widgets/stat_attempt.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/views/widgets/gauge_chart.dart';
 
-
-
 class ResultPage extends StatelessWidget {
   const ResultPage({super.key});
 
@@ -17,24 +15,84 @@ class ResultPage extends StatelessWidget {
           ? Colors.blueGrey.shade900
           : Color(0XFFedeec9),
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 0,
         leadingWidth: 100,
-        leading: TextButton.icon(
-          label: Text('Back', style: TextStyle(fontSize: 15)),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_new_rounded),
-        ),
         title: Text('R E S U L T', style: TextStyle(fontSize: 30)),
         centerTitle: true,
       ),
       body: Column(
         children: [
-          SizedBox(height: 10),
+          SizedBox(height: 20),
+          Text(
+            'Your result',
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 6,
+              color: Color(0XFF042a2b),
+            ),
+          ),
+          SizedBox(height: 20),
           StatusAndAttempt(),
           SizedBox(height: 30),
           Center(child: GaugeChart()),
+          SizedBox(height: 70),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  height: 100,
+                  width: 200,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0XFFb8f2e6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(22),
+                      ),
+                      elevation: 3,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      "Recalculate",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 100,
+                  width: 200,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0XFFb8f2e6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(22),
+                      ),
+                      elevation: 3,
+                    ),
+                    onPressed: () {
+                      // TODO: Add function for second button
+                    },
+                    child: const Text(
+                      "Save to History",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

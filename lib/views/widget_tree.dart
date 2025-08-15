@@ -1,7 +1,6 @@
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/pages/bmi_page.dart';
 import 'package:demo/views/pages/history_page.dart';
-import 'package:demo/views/pages/result_page.dart';
 import 'package:demo/views/widgets/navbar_widget.dart';
 import 'package:flutter/material.dart';
 List<Widget> pages = [BmiPage(), HistoryPage()];

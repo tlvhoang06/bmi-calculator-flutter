@@ -21,11 +21,11 @@ class GaugeChart extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                Text('Y o u r  S c o r e',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text('Y o u r  S c o r e',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0XFF001427))),
                 PrettyGauge(
                   minValue: 0,
                   maxValue: 50,
-                  needleColor: Color(0XFF0081a7),
+                  needleColor: Color(0XFF03045e),
                   currentValue: (bmi.value > 50) ? 50 : bmi.value,
                   gaugeSize: 300,
                   showMarkers: false,
