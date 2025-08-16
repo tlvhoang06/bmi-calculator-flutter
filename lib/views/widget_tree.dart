@@ -14,7 +14,7 @@ class WidgetTree extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80.0,
+        toolbarHeight: 60.0,
         backgroundColor: Color(0XFFb8f2e6),
         centerTitle: true,
         title: ValueListenableBuilder(

@@ -34,7 +34,6 @@ class MyDrawer extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20),
-          Divider(color: Colors.grey, indent: 35, endIndent: 35),
           SizedBox(height: 30),
           ValueListenableBuilder(
             valueListenable: isDarkMode,

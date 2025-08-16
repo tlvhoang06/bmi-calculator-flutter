@@ -7,9 +7,9 @@ class GaugeChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 450,
-      height: 347,
+    return SizedBox(
+      width: 420,
+      height: 370,
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
@@ -27,7 +27,7 @@ class GaugeChart extends StatelessWidget {
                   maxValue: 50,
                   needleColor: Color(0XFF03045e),
                   currentValue: (bmi.value > 50) ? 50 : bmi.value,
-                  gaugeSize: 300,
+                  gaugeSize: 320,
                   showMarkers: false,
                   valueWidget: Text(
                     bmi.value.toStringAsFixed(1),

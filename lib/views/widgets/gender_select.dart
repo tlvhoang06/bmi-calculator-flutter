@@ -14,7 +14,7 @@ class GenderSelect extends StatelessWidget {
           children: [
             // Male
             Ink(
-              height: 200,
+              height: 230,
               width: 190,
               decoration: BoxDecoration(
                 color: (male) ? Color(0XFF72ddf7) : Colors.grey.shade300,
@@ -45,7 +45,7 @@ class GenderSelect extends StatelessWidget {
 
             // Female
             Ink(
-              height: 200,
+              height: 230,
               width: 190,
               decoration: BoxDecoration(
                 color: (!male) ? Color(0XFFffa5ab) : Colors.grey.shade300,
