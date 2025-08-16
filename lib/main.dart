@@ -9,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             scaffoldBackgroundColor: isDark ? Color(0XFF0d1b2a) : Color(0XFFedeec9),
-            colorScheme: ColorScheme.fromSeed(seedColor: Color(0XFFdde7c7))
+            colorScheme: ColorScheme.fromSeed(seedColor: Color(0XFFb8f2e6))
           ),
           home: WidgetTree(),
         );

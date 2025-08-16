@@ -8,7 +8,7 @@ class NumBox extends StatelessWidget {
     return Container(
       height: 150,
       width: 190,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(22), color: Colors.teal.shade200,),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(22), color: Color(0XFFb8f2e6),),
       child: Center(child: child)
     );
   }
