@@ -1,4 +1,5 @@
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/pages/login_page.dart';
 import 'package:demo/views/widget_tree.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: isDark ? Color(0XFF0d1b2a) : Color(0XFFedeec9),
             colorScheme: ColorScheme.fromSeed(seedColor: Color(0XFFb8f2e6))
           ),
-          home: WidgetTree(),
+          home: LoginPage(),
         );
       }
     );

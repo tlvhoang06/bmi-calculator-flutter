@@ -1,4 +1,5 @@
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -58,6 +59,17 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           Divider(color: Colors.grey, indent: 16, endIndent: 16),
+          InkWell(
+            onTap: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+                (route) => false,
+              );
+            },
+            splashColor: Colors.grey.shade100,
+            child: ListTile(title: Text('Log out')),
+          ),
         ],
       ),
     );
