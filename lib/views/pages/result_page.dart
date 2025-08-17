@@ -21,82 +21,86 @@ class ResultPage extends StatelessWidget {
         title: Text('R E S U L T', style: TextStyle(fontSize: 30)),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(5),
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            Text(
-              'Your result',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 6,
-                color: isDarkMode.value ? Color(0XFFc0fdff) : Color(0XFF042a2b),
-              ),
-            ),
-            SizedBox(height: 40),
-            StatusAndAttempt(),
-            SizedBox(height: 50),
-            Center(child: GaugeChart()),
-            SizedBox(height: 70),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 100,
-                    width: 180,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0XFFb8f2e6),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                        elevation: 3,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        "Recalculate",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                Text(
+                  'Your result',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 6,
+                    color: isDarkMode.value ? Color(0XFFc0fdff) : Color(0XFF042a2b),
                   ),
-                  SizedBox(
-                    height: 100,
-                    width: 180,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0XFFb8f2e6),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(22),
+                ),
+                SizedBox(height: 40),
+                StatusAndAttempt(),
+                SizedBox(height: 50),
+                Center(child: GaugeChart()),
+                SizedBox(height: 70),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 100,
+                        width: 180,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0XFFb8f2e6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(22),
+                            ),
+                            elevation: 3,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            "Recalculate",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        elevation: 3,
                       ),
-                      onPressed: () {
-                        // TODO: Add function for second button
-                      },
-                      child: const Text(
-                        "Save to History",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                      SizedBox(
+                        height: 100,
+                        width: 180,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0XFFb8f2e6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(22),
+                            ),
+                            elevation: 3,
+                          ),
+                          onPressed: () {
+                            // TODO: Add function for second button
+                          },
+                          child: const Text(
+                            "Save to History",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
