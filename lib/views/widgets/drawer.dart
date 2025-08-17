@@ -61,6 +61,9 @@ class MyDrawer extends StatelessWidget {
           Divider(color: Colors.grey, indent: 16, endIndent: 16),
           InkWell(
             onTap: () {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text('Logged out'), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,));
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => LoginPage()),

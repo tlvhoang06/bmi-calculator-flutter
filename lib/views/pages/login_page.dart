@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
+  LoginPage({super.key});
+  String name = 'Truong Le Vu Hoang';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +46,10 @@ class LoginPage extends StatelessWidget {
                   height: 60,
                   child: FilledButton(
                     onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Logged in as ${name}'), duration: Duration(seconds: 2),behavior: SnackBarBehavior.floating,),
+              
+                      );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
