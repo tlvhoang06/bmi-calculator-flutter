@@ -14,13 +14,7 @@ class ResultPage extends StatelessWidget {
       backgroundColor: (isDarkMode.value)
           ? Colors.blueGrey.shade900
           : Color(0XFFedeec9),
-      appBar: AppBar(
-        backgroundColor: Color(0XFFedeec9),
-        toolbarHeight: 0,
-        leadingWidth: 100,
-        title: Text('R E S U L T', style: TextStyle(fontSize: 30)),
-        centerTitle: true,
-      ),
+      
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -41,7 +35,7 @@ class ResultPage extends StatelessWidget {
                 StatusAndAttempt(),
                 SizedBox(height: 50),
                 Center(child: GaugeChart()),
-                SizedBox(height: 70),
+                SizedBox(height: 60),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(

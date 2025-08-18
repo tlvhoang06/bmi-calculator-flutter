@@ -1,14 +1,12 @@
-
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/functions/function.dart';
 import 'package:demo/views/pages/result_page.dart';
 import 'package:demo/views/widgets/gender_select.dart';
 import 'package:demo/views/widgets/height_slider.dart';
-import 'package:demo/views/widgets/num_box.dart';
+import 'package:demo/views/widgets/stat_card.dart';
+import 'package:demo/views/widgets/text_type_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-
 
 class BmiPage extends StatelessWidget {
   const BmiPage({super.key});
@@ -23,99 +21,64 @@ class BmiPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 25),
               child: GenderSelect(),
             ),
-        
+
             // Height Slider
             HeightSlider(),
             SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Weight
+
+            // Weight
                 ValueListenableBuilder(
                   valueListenable: weight,
                   builder: (context, weightValue, child) {
-                    return NumBox(
-                      child: Column(
+                    return StatCard(
+                      category: 'W e i g h t',
+                      displayNumber: weightValue.toString(),
+                      measurementUnit: 'kg',
+                      action: TextTypeBox(),
+                    );
+                  },
+                ),
+                SizedBox(width: 20),
+
+            // Age
+                ValueListenableBuilder(
+                  valueListenable: age,
+                  builder: (context, ageValue, child) {
+                    return StatCard(
+                      category: 'A g e',
+                      displayNumber: ageValue.toString(),
+                      measurementUnit: 'y/o',
+                      action: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(height: 10),
-                          Text(
-                            'W e i g h t',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(width: 20),
-                              Text(
-                                weight.value.toString(),
-                                style: TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          ElevatedButton(
+                            onPressed: () {
+                              age.value -= 1;
+                              ageValue = age.value;
+                            },
+                            child: Text(
+                              '—',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
                               ),
-                              SizedBox(width: 3),
-                              Text('kg'),
-                            ],
+                            ),
                           ),
-        
-                          // Text Field Container
-                          SizedBox(height: 10),
-                          SizedBox(
-                            height: 35,
-                            width: 100,
-                            child: ValueListenableBuilder(
-                              valueListenable: isDarkMode,
-                              builder: (context, isDark, child) {
-                                return TextField(
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(5),
-                                  ],
-                                  onChanged: (value) {
-                                    double? val = double.tryParse(value);
-                                    if (val != null) {
-                                      weight.value = val;
-                                    }
-                                  },
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  decoration: InputDecoration(
-                                    hintText: 'Enter here',
-                                    hintStyle: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.grey.shade700,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 10,
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(
-                                        color: isDark ? Colors.black : Colors.white,
-                                        width: 3,
-                                      ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(
-                                        color: Colors.indigo.shade300,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.blue.shade100,
-                                  ),
-                                  cursorHeight: 15,
-                                );
-                              },
+                          SizedBox(width: 10),
+                          ElevatedButton(
+                            onPressed: () {
+                              age.value += 1;
+                              ageValue = age.value;
+                            },
+                            child: Text(
+                              '+',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ],
@@ -123,77 +86,11 @@ class BmiPage extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(width: 20),
-        
-                // Age
-                ValueListenableBuilder(
-                  valueListenable: age,
-                  builder: (context, ageValue, child) {
-                    return NumBox(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 10),
-                          Text(
-                            'A g e',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(width: 20),
-                              Text(
-                                age.value.toString(),
-                                style: TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(width: 3),
-                              Text('y/o'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  age.value -= 1;
-                                  ageValue = age.value;
-                                },
-                                child: Text(
-                                  '—',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              ElevatedButton(
-                                onPressed: () {
-                                  age.value += 1;
-                                  ageValue = age.value;
-                                },
-                                child: Text(
-                                  '+',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                SizedBox(height: 30),
               ],
             ),
+
             SizedBox(height: 30),
-        
             // Calculate Button
             ValueListenableBuilder(
               valueListenable: bmi,
