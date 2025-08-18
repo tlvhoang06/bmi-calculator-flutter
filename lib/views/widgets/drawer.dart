@@ -1,6 +1,8 @@
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:demo/data/constants.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -43,8 +45,10 @@ class MyDrawer extends StatelessWidget {
                 title: Text(isDark ? 'Dark mode' : 'Light mode'),
                 trailing: Switch(
                   value: isDark,
-                  onChanged: (value) {
-                    isDarkMode.value = !isDarkMode.value;
+                  onChanged: (value) async{
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.setBool(KThemeModeKey.themeKey, value);
+                    isDarkMode.value = value;
                   },
                   activeColor: Color(0XFF0d1b2a),
                   inactiveTrackColor: Color(0XFFedeec9),

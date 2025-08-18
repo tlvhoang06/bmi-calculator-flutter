@@ -1,3 +1,4 @@
+import 'package:demo/data/notifer.dart';
 import 'package:demo/views/widget_tree.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFedeec9),
+      backgroundColor: isDarkMode.value ? Color(0XFF0d1b2a) : Color(0XFFedeec9),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -24,7 +25,12 @@ class LoginPage extends StatelessWidget {
                       borderSide: BorderSide(color: Color(0XFF1b4965)),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    hint: Text('Username'),
+                    hint: Text(
+                      'Username',
+                      style: TextStyle(
+                        color: (isDarkMode.value ? Colors.white : Colors.black),
+                      ),
+                    ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 30),
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
@@ -33,10 +39,19 @@ class LoginPage extends StatelessWidget {
                 TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                      borderSide: BorderSide(
+                        color: isDarkMode.value
+                            ? Color(0XFF1b4965)
+                            : Color(0XFFeaf4f4),
+                      ),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    hint: Text('Password'),
+                    hint: Text(
+                      'Password',
+                      style: TextStyle(
+                        color: (isDarkMode.value ? Colors.white : Colors.black),
+                      ),
+                    ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 30),
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
@@ -47,8 +62,11 @@ class LoginPage extends StatelessWidget {
                   child: FilledButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Logged in as ${name}'), duration: Duration(seconds: 2),behavior: SnackBarBehavior.floating,),
-              
+                        SnackBar(
+                          content: Text('Logged in as ${name}'),
+                          duration: Duration(seconds: 2),
+                          behavior: SnackBarBehavior.floating,
+                        ),
                       );
                       Navigator.push(
                         context,
