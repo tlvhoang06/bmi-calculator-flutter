@@ -1,5 +1,6 @@
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/widget_tree.dart';
+import 'package:demo/views/widgets/text_type_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
@@ -20,16 +21,17 @@ class LoginPage extends StatelessWidget {
               children: [
                 Lottie.asset('assets/lotties/login.json'),
                 TextField(
+                  style: TextStyle(
+                    color: isDarkMode.value ? Colors.white : Colors.black,
+                  ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0XFF1b4965)),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    hint: Text(
-                      'Username',
-                      style: TextStyle(
-                        color: (isDarkMode.value ? Colors.white : Colors.black),
-                      ),
+                    hintText: 'Username',
+                    hintStyle: TextStyle(
+                      color: (isDarkMode.value ? Colors.white : Colors.black),
                     ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 30),
                   ),
@@ -37,6 +39,9 @@ class LoginPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextField(
+                  style: TextStyle(
+                    color: isDarkMode.value ? Colors.white : Colors.black,
+                  ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -46,11 +51,9 @@ class LoginPage extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    hint: Text(
-                      'Password',
-                      style: TextStyle(
-                        color: (isDarkMode.value ? Colors.white : Colors.black),
-                      ),
+                    hintText: 'Password',
+                    hintStyle: TextStyle(
+                      color: (isDarkMode.value ? Colors.white : Colors.black),
                     ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 30),
                   ),

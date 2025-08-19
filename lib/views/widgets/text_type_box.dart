@@ -14,7 +14,7 @@ class TextTypeBox extends StatelessWidget {
         valueListenable: isDarkMode,
         builder: (context, isDark, child) {
           return TextField(
-            inputFormatters: [LengthLimitingTextInputFormatter(5)],
+            inputFormatters: [LengthLimitingTextInputFormatter(4)],
             onChanged: (value) {
               double? val = double.tryParse(value);
               if (val != null) {
