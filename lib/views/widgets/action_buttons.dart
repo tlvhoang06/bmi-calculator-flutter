@@ -2,29 +2,43 @@ import 'package:flutter/material.dart';
 
 class ActionButton extends StatelessWidget {
   final String text;
-  final Colors color;
-  const ActionButton({super.key, required this.text, required this.color});
+  final double fontSize;
+  final int color;
+  final double radius;
+  final double height;
+  final double width;
+  final VoidCallback action;
+  const ActionButton({
+    super.key,
+    required this.text,
+    required this.fontSize,
+    required this.color,
+    required this.radius,
+    required this.height,
+    required this.width,
+    required this.action,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
-      width: 180,
+      height: height,
+      width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor:Color(color),
+          backgroundColor: Color(color),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(22),
+            borderRadius: BorderRadius.circular(radius),
           ),
           elevation: 3,
         ),
         onPressed: () {
-          Navigator.pop(context);
+          action();
         },
         child: Text(
-          "Recalculate",
+          text,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: fontSize,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),

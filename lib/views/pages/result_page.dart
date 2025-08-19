@@ -1,6 +1,6 @@
-import 'dart:math';
 
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/widgets/action_buttons.dart';
 import 'package:demo/views/widgets/stat_attempt.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/views/widgets/gauge_chart.dart';
@@ -14,7 +14,7 @@ class ResultPage extends StatelessWidget {
       backgroundColor: (isDarkMode.value)
           ? Colors.blueGrey.shade900
           : Color(0XFFedeec9),
-      
+
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -28,7 +28,9 @@ class ResultPage extends StatelessWidget {
                     fontSize: 40,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 6,
-                    color: isDarkMode.value ? Color(0XFFc0fdff) : Color(0XFF042a2b),
+                    color: isDarkMode.value
+                        ? Color(0XFFc0fdff)
+                        : Color(0XFF042a2b),
                   ),
                 ),
                 SizedBox(height: 40),
@@ -41,53 +43,27 @@ class ResultPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
+                      ActionButton(
+                        text: 'Recalculate',
+                        fontSize: 18,
+                        color: 0XFFb8f2e6,
+                        radius: 22,
                         height: 100,
                         width: 180,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0XFFb8f2e6),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(22),
-                            ),
-                            elevation: 3,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text(
-                            "Recalculate",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                        action: () {
+                          Navigator.pop(context);
+                        },
                       ),
-                      SizedBox(
+                      ActionButton(
+                        text: 'Save to History',
+                        fontSize: 18,
+                        color: 0XFFb8f2e6,
+                        radius: 22,
                         height: 100,
                         width: 180,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0XFFb8f2e6),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(22),
-                            ),
-                            elevation: 3,
-                          ),
-                          onPressed: () {
-                            // TODO: Add function for second button
-                          },
-                          child: const Text(
-                            "Save to History",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                        action: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ],
                   ),

@@ -3,10 +3,10 @@ import 'package:demo/views/functions/function.dart';
 import 'package:demo/views/pages/result_page.dart';
 import 'package:demo/views/widgets/gender_select.dart';
 import 'package:demo/views/widgets/height_slider.dart';
+import 'package:demo/views/widgets/increment_decrement_buttons.dart';
 import 'package:demo/views/widgets/stat_card.dart';
 import 'package:demo/views/widgets/text_type_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class BmiPage extends StatelessWidget {
   const BmiPage({super.key});
@@ -28,8 +28,7 @@ class BmiPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-            // Weight
+                // Weight
                 ValueListenableBuilder(
                   valueListenable: weight,
                   builder: (context, weightValue, child) {
@@ -43,7 +42,7 @@ class BmiPage extends StatelessWidget {
                 ),
                 SizedBox(width: 20),
 
-            // Age
+                // Age
                 ValueListenableBuilder(
                   valueListenable: age,
                   builder: (context, ageValue, child) {
@@ -51,37 +50,13 @@ class BmiPage extends StatelessWidget {
                       category: 'A g e',
                       displayNumber: ageValue.toString(),
                       measurementUnit: 'y/o',
-                      action: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              age.value -= 1;
-                              ageValue = age.value;
-                            },
-                            child: Text(
-                              '—',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          ElevatedButton(
-                            onPressed: () {
-                              age.value += 1;
-                              ageValue = age.value;
-                            },
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ],
+                      action: IncrementDecrementButtons(
+                        onDecrement: () {
+                          age.value -=1;
+                        },
+                        onIncrement: () {
+                          age.value += 1;
+                        },
                       ),
                     );
                   },
