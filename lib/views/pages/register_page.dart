@@ -1,13 +1,11 @@
 import 'package:demo/data/notifer.dart';
-import 'package:demo/views/pages/register_page.dart';
 import 'package:demo/views/widget_tree.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
-  String name = 'Truong Le Vu Hoang';
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +15,12 @@ class LoginPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Lottie.asset('assets/lotties/login.json'),
                 TextField(
+                  onChanged: (value) {
+                    //username = value;
+                  },
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
@@ -37,21 +37,36 @@ class LoginPage extends StatelessWidget {
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 TextField(
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: isDarkMode.value
-                            ? Color(0XFF1b4965)
-                            : Color(0XFFeaf4f4),
-                      ),
+                      borderSide: BorderSide(color: Color(0XFF1b4965)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     hintText: 'Password',
+                    hintStyle: TextStyle(
+                      color: (isDarkMode.value ? Colors.white : Colors.black),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
+                  ),
+                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
+                ),
+                SizedBox(height: 15),
+            
+                TextField(
+                  style: TextStyle(
+                    color: isDarkMode.value ? Colors.white : Colors.black,
+                  ),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: 'Confirm Password',
                     hintStyle: TextStyle(
                       color: (isDarkMode.value ? Colors.white : Colors.black),
                     ),
@@ -66,7 +81,7 @@ class LoginPage extends StatelessWidget {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Logged in as ${name}'),
+                          content: Text('Logged in as '),
                           duration: Duration(seconds: 2),
                           behavior: SnackBarBehavior.floating,
                         ),
@@ -86,7 +101,7 @@ class LoginPage extends StatelessWidget {
                       backgroundColor: Color(0XFFc0fdff),
                       foregroundColor: Colors.black,
                     ),
-                    child: Text('Login'),
+                    child: Text('Sign up'),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -94,7 +109,7 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Don\'t have an account yet?',
+                      'Already have an account?',
                       style: TextStyle(
                         color: isDarkMode.value
                             ? Colors.grey.shade100
@@ -103,14 +118,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return RegisterPage();
-                            },
-                          ),
-                        );
+                        Navigator.pop(context);
                       },
                       style: TextButton.styleFrom(
                         minimumSize: Size(0, 0),
@@ -121,7 +129,7 @@ class LoginPage extends StatelessWidget {
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
                       child: Text(
-                        'Sign up',
+                        'Login',
                         style: TextStyle(
                           color: Colors.blue.shade300,
                           decoration: TextDecoration.underline,
