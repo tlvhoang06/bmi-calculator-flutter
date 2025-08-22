@@ -1,5 +1,7 @@
 import 'package:demo/data/notifer.dart';
+import 'package:demo/services/auth_service.dart';
 import 'package:demo/views/pages/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:demo/data/constants.dart';
@@ -9,6 +11,33 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void popPage() {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Logged out'),
+          duration: Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+        (route) => false,
+      );
+    }
+
+    void logOut() async {
+      try {
+        await authServices.value.signOut();
+        popPage();
+      } on FirebaseAuthException catch (error) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: ${error.message}')));
+      }
+      ;
+    }
+
     return Drawer(
       backgroundColor: Color(0XFFe0fbfc),
       child: ListView(
@@ -45,7 +74,7 @@ class MyDrawer extends StatelessWidget {
                 title: Text(isDark ? 'Dark mode' : 'Light mode'),
                 trailing: Switch(
                   value: isDark,
-                  onChanged: (value) async{
+                  onChanged: (value) async {
                     final prefs = await SharedPreferences.getInstance();
                     await prefs.setBool(KThemeModeKey.themeKey, value);
                     isDarkMode.value = value;
@@ -65,14 +94,7 @@ class MyDrawer extends StatelessWidget {
           Divider(color: Colors.grey, indent: 16, endIndent: 16),
           InkWell(
             onTap: () {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text('Logged out'), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,));
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-                (route) => false,
-              );
+              logOut();
             },
             splashColor: Colors.grey.shade100,
             child: ListTile(title: Text('Log out')),

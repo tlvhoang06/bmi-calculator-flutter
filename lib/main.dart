@@ -1,7 +1,6 @@
 import 'package:demo/data/constants.dart';
 import 'package:demo/data/notifer.dart';
-import 'package:demo/views/pages/login_page.dart';
-import 'package:demo/views/widget_tree.dart';
+import 'package:demo/views/auth_gate.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,7 +42,7 @@ class _MyAppState extends State<MyApp> {
             scaffoldBackgroundColor: isDark ? Color(0XFF0d1b2a) : Color(0XFFedeec9),
             colorScheme: ColorScheme.fromSeed(seedColor: Color(0XFFb8f2e6))
           ),
-          home: LoginPage(),
+          home: AuthGate(),
         );
       }
     );

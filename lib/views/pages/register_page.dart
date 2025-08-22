@@ -1,11 +1,53 @@
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/widget_tree.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPassWordController = TextEditingController();
+  String errorMessage = ' ';
+  final formKey = GlobalKey<FormState>();
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPassWordController.dispose();
+    super.dispose();
+  }
+
+  void register() async {
+    try {
+      await authServices.value.createAccount(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return WidgetTree();
+          },
+        ),
+      );
+    } on FirebaseAuthException catch (error) {
+      setState(() {
+        errorMessage = error.message ?? 'Error!';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +59,10 @@ class RegisterPage extends StatelessWidget {
             child: Column(
               children: [
                 Lottie.asset('assets/lotties/login.json'),
+
+                // Display Name
                 TextField(
-                  onChanged: (value) {
-                    //username = value;
-                  },
+                  controller: _nameController,
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
@@ -29,7 +71,7 @@ class RegisterPage extends StatelessWidget {
                       borderSide: BorderSide(color: Color(0XFF1b4965)),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    hintText: 'Username',
+                    hintText: 'Display Name',
                     hintStyle: TextStyle(
                       color: (isDarkMode.value ? Colors.white : Colors.black),
                     ),
@@ -38,7 +80,31 @@ class RegisterPage extends StatelessWidget {
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
                 ),
                 SizedBox(height: 15),
+
+                // Email
                 TextField(
+                  controller: _emailController,
+                  style: TextStyle(
+                    color: isDarkMode.value ? Colors.white : Colors.black,
+                  ),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: 'Email',
+                    hintStyle: TextStyle(
+                      color: (isDarkMode.value ? Colors.white : Colors.black),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
+                  ),
+                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
+                ),
+                SizedBox(height: 15),
+
+                // Password
+                TextField(
+                  controller: _passwordController,
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
@@ -54,10 +120,13 @@ class RegisterPage extends StatelessWidget {
                     contentPadding: EdgeInsets.symmetric(horizontal: 30),
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
+                  obscureText: true, // hide text
                 ),
                 SizedBox(height: 15),
-            
+
+                // Confirm Password
                 TextField(
+                  controller: _confirmPassWordController,
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
@@ -73,27 +142,25 @@ class RegisterPage extends StatelessWidget {
                     contentPadding: EdgeInsets.symmetric(horizontal: 30),
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
+                  obscureText: true, // hide text
                 ),
+
+                SizedBox(height: 10),
+                Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 30),
+
                 SizedBox(
                   height: 60,
                   child: FilledButton(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Logged in as '),
-                          duration: Duration(seconds: 2),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return WidgetTree();
-                          },
-                        ),
-                      );
+                      if (_passwordController.text ==
+                          _confirmPassWordController.text) {
+                        register();
+                      } else {
+                        setState(() {
+                          errorMessage = "Password does not match";
+                        });
+                      }
                     },
                     style: FilledButton.styleFrom(
                       elevation: 3,

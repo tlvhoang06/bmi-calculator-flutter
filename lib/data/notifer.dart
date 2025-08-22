@@ -1,3 +1,4 @@
+import 'package:demo/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 ValueNotifier<bool> isDarkMode = ValueNotifier(false);
@@ -7,3 +8,6 @@ ValueNotifier<double> height = ValueNotifier(170);
 ValueNotifier<double> weight = ValueNotifier(65.0);
 ValueNotifier<double> age = ValueNotifier(18);
 ValueNotifier<double> bmi = ValueNotifier(0);
+
+// Auth Services
+ValueNotifier<AuthService> authServices = ValueNotifier(AuthService());
