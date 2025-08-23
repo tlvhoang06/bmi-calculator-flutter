@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
     } on FirebaseAuthException catch (error) {
       setState(() {
-        errorMessage = error.message ?? 'Error!';
+        errorMessage = error.message ?? 'Register failed!';
       });
     }
   }

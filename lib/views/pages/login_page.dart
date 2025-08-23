@@ -1,13 +1,58 @@
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/pages/register_page.dart';
 import 'package:demo/views/widget_tree.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   String name = 'Truong Le Vu Hoang';
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  String errorMessage = ' ';
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void login() async {
+    try {
+      await authServices.value.signIn(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Logged in as ${name}'),
+          duration: Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return WidgetTree();
+          },
+        ),
+      );
+    } on FirebaseAuthException catch (error) {
+      setState(() {
+        errorMessage = error.message ?? "Login failed!";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +66,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 Lottie.asset('assets/lotties/login.json'),
                 TextField(
+                  controller: _emailController,
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
@@ -29,7 +75,7 @@ class LoginPage extends StatelessWidget {
                       borderSide: BorderSide(color: Color(0XFF1b4965)),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    hintText: 'Username',
+                    hintText: 'Email',
                     hintStyle: TextStyle(
                       color: (isDarkMode.value ? Colors.white : Colors.black),
                     ),
@@ -39,6 +85,8 @@ class LoginPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextField(
+                  controller: _passwordController,
+                  obscureText: true,
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
@@ -64,21 +112,7 @@ class LoginPage extends StatelessWidget {
                   height: 60,
                   child: FilledButton(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Logged in as ${name}'),
-                          duration: Duration(seconds: 2),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return WidgetTree();
-                          },
-                        ),
-                      );
+                      login();
                     },
                     style: FilledButton.styleFrom(
                       elevation: 3,
@@ -89,6 +123,8 @@ class LoginPage extends StatelessWidget {
                     child: Text('Login'),
                   ),
                 ),
+                SizedBox(height: 10),
+                Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
