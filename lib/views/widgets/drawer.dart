@@ -37,6 +37,60 @@ class MyDrawer extends StatelessWidget {
       ;
     }
 
+    void confirmLogout() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            surfaceTintColor: Colors.blue.shade100,
+            actionsAlignment: MainAxisAlignment.spaceBetween,
+            actionsPadding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(12),
+            ),
+            title: Align(child: Text("Confirm Logout")),
+            content: SizedBox(
+              height: 30,
+              width: 300,
+              child: Align(child: Text("Are you sure you want to log out?")),
+            ),
+            actions: [
+              // No
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'No',
+                  style: TextStyle(
+                    color: Colors.blue.shade400,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+
+              // Yes
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  logOut();
+                },
+                child: Text(
+                  'Yes',
+                  style: TextStyle(
+                    color: Colors.blue.shade400,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Drawer(
       backgroundColor: Color(0XFFe0fbfc),
       child: ListView(
@@ -93,7 +147,7 @@ class MyDrawer extends StatelessWidget {
           Divider(color: Colors.grey, indent: 16, endIndent: 16),
           InkWell(
             onTap: () {
-              logOut();
+              confirmLogout();
             },
             splashColor: Colors.grey.shade100,
             child: ListTile(title: Text('Log out')),

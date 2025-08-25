@@ -1,3 +1,4 @@
+import 'package:demo/data/notifer.dart';
 import 'package:demo/views/pages/login_page.dart';
 import 'package:demo/views/widget_tree.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,14 +9,19 @@ class AuthGate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(), builder: (context, snapshot) {
-      if(snapshot.connectionState == ConnectionState.waiting){   // spinner
-        return Scaffold(body: Center(child: CircularProgressIndicator()));
+    return ValueListenableBuilder(
+      valueListenable: authServices,
+      builder: (context, value, child) {
+        return StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(), builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting){   // spinner
+            return Scaffold(body: Center(child: CircularProgressIndicator()));
+          }
+          else if(snapshot.hasData){  // user logged in
+            return WidgetTree();
+          }
+          return LoginPage();   // user not logged in
+        },);
       }
-      else if(snapshot.hasData){  // user logged in
-        return WidgetTree();
-      }
-      return LoginPage();   // user not logged in
-    },);
+    );
   }
 }
