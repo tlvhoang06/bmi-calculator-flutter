@@ -1,4 +1,5 @@
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/pages/change_password.dart';
 import 'package:demo/views/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -151,6 +152,16 @@ class MyDrawer extends StatelessWidget {
             },
             splashColor: Colors.grey.shade100,
             child: ListTile(title: Text('Log out')),
+          ),
+          Divider(color: Colors.grey, indent: 16, endIndent: 16),
+          InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ChangePassword();
+              },));
+            },
+            splashColor: Colors.grey.shade100,
+            child: ListTile(title: Text('Change password')),
           ),
         ],
       ),

@@ -1,5 +1,5 @@
 import 'package:demo/data/notifer.dart';
-import 'package:demo/views/functions/function.dart';
+import 'package:demo/views/functions/app_function.dart';
 import 'package:flutter/material.dart';
 
 class StatusAndAttempt extends StatelessWidget {

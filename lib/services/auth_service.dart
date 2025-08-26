@@ -33,10 +33,17 @@ class AuthService {
   }
 
   // Change Password
-  Future<void> changePassword({required String email}) async{
-    return firebaseAuth.sendPasswordResetEmail(email: email);
+  Future<void> changePassword({required String email, required String currentPassWord, required String newPassWord}) async{
+    AuthCredential credential = EmailAuthProvider.credential(email: email, password: currentPassWord);
+    await user!.reauthenticateWithCredential(credential);
+    await user!.updatePassword(newPassWord);
   }
-
+  
+  // Forget Password
+  Future<void> forgetPassWord({required String email}) async{
+    return await firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+  
   // update UserName
   Future<void> updateUserName({required String username}) async{
     return await user!.updateDisplayName(username);

@@ -1,5 +1,5 @@
 import 'package:demo/data/notifer.dart';
-import 'package:demo/views/functions/function.dart';
+import 'package:demo/views/functions/app_function.dart';
 import 'package:demo/views/pages/result_page.dart';
 import 'package:demo/views/widgets/gender_select.dart';
 import 'package:demo/views/widgets/height_slider.dart';
@@ -52,7 +52,7 @@ class BmiPage extends StatelessWidget {
                       measurementUnit: 'y/o',
                       action: IncrementDecrementButtons(
                         onDecrement: () {
-                          age.value -=1;
+                          age.value -= 1;
                         },
                         onIncrement: () {
                           age.value += 1;
