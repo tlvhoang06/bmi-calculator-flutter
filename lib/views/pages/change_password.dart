@@ -34,15 +34,13 @@ class _ManagePasswordPageState extends State<ChangePassword> {
           newPassWord: _newPassWordController.text,
         );
         ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Password Changed!'),
-          duration: Duration(seconds: 2),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-      Navigator.pop(
-        context,
-      );
+          SnackBar(
+            content: Text('Password Changed!'),
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        Navigator.pop(context);
       } on FirebaseException catch (error) {
         setState(() {
           errorMessage = error.message ?? "Change password failed!";
@@ -52,7 +50,11 @@ class _ManagePasswordPageState extends State<ChangePassword> {
 
     return Scaffold(
       backgroundColor: isDarkMode.value ? Color(0XFF0d1b2a) : Color(0XFFedeec9),
-      appBar: AppBar(backgroundColor: Color(0XFFc0fdff),),
+      appBar: AppBar(
+        backgroundColor: Color(0XFFc0fdff),
+        title: Text("C H A N G E   P A S S W O R D"),
+        centerTitle: true,
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -60,7 +62,12 @@ class _ManagePasswordPageState extends State<ChangePassword> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Lottie.asset('assets/lotties/login.json'),
+                Image.asset(
+                  'assets/images/security_icon.png',
+                  height: 300,
+                  width: 300,
+                ),
+                SizedBox(height: 70),
                 TextField(
                   controller: _emailController,
                   style: TextStyle(

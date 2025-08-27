@@ -116,10 +116,12 @@ class MyDrawer extends StatelessWidget {
                   ],
                 ),
               ),
+              Divider(color: Colors.grey, indent: 50, endIndent: 50),
+              SizedBox(height: 30),
               Text('S e t t i n g'),
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 15),
           SizedBox(height: 30),
           ValueListenableBuilder(
             valueListenable: isDarkMode,
@@ -156,9 +158,14 @@ class MyDrawer extends StatelessWidget {
           Divider(color: Colors.grey, indent: 16, endIndent: 16),
           InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ChangePassword();
-              },));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ChangePassword();
+                  },
+                ),
+              );
             },
             splashColor: Colors.grey.shade100,
             child: ListTile(title: Text('Change password')),
