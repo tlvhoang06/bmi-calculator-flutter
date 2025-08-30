@@ -1,4 +1,5 @@
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/functions/confirm_dialog_function.dart';
 import 'package:demo/views/pages/change_password.dart';
 import 'package:demo/views/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,60 +37,6 @@ class MyDrawer extends StatelessWidget {
         ).showSnackBar(SnackBar(content: Text('Error: ${error.message}')));
       }
       ;
-    }
-
-    void confirmLogout() {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            surfaceTintColor: Colors.blue.shade100,
-            actionsAlignment: MainAxisAlignment.spaceBetween,
-            actionsPadding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(12),
-            ),
-            title: Align(child: Text("Confirm Logout")),
-            content: SizedBox(
-              height: 30,
-              width: 300,
-              child: Align(child: Text("Are you sure you want to log out?")),
-            ),
-            actions: [
-              // No
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'No',
-                  style: TextStyle(
-                    color: Colors.blue.shade400,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-
-              // Yes
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  logOut();
-                },
-                child: Text(
-                  'Yes',
-                  style: TextStyle(
-                    color: Colors.blue.shade400,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      );
     }
 
     return Drawer(
@@ -150,7 +97,12 @@ class MyDrawer extends StatelessWidget {
           Divider(color: Colors.grey, indent: 16, endIndent: 16),
           InkWell(
             onTap: () {
-              confirmLogout();
+              showConfirmDialog(
+                title: "Confirm Logout",
+                content: "Are you sure you want to log out?",
+                context: context,
+                onConfirm: logOut,
+              );
             },
             splashColor: Colors.grey.shade100,
             child: ListTile(title: Text('Log out')),

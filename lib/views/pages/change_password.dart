@@ -15,18 +15,25 @@ class _ManagePasswordPageState extends State<ChangePassword> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _currentPassWordController = TextEditingController();
   TextEditingController _newPassWordController = TextEditingController();
+  TextEditingController _confirmPassWordController = TextEditingController();
   String errorMessage = ' ';
   final formKey = GlobalKey<FormState>();
+  void dispose() {
+    _emailController.dispose();
+    _currentPassWordController.dispose();
+    _newPassWordController.dispose();
+    _confirmPassWordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
-    void dispose() {
-      _emailController.dispose();
-      _currentPassWordController.dispose();
-      _newPassWordController.dispose();
-      super.dispose();
-    }
-
     void changePassword() async {
+      if(_newPassWordController.text != _confirmPassWordController.text){
+        setState(() {
+          errorMessage = "Password does not match";
+        });
+        return;
+      }
       try {
         await authServices.value.changePassword(
           email: _emailController.text,
@@ -134,6 +141,28 @@ class _ManagePasswordPageState extends State<ChangePassword> {
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
                 ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: _confirmPassWordController,
+                  style: TextStyle(
+                    color: isDarkMode.value ? Colors.white : Colors.black,
+                  ),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: 'Confirm Password',
+                    hintStyle: TextStyle(
+                      color: (isDarkMode.value ? Colors.white : Colors.black),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
+                  ),
+                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
+                  obscureText: true, // hide text
+                ),
+                SizedBox(height: 10),
+                Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 30),
                 SizedBox(
                   height: 60,
@@ -150,9 +179,6 @@ class _ManagePasswordPageState extends State<ChangePassword> {
                     child: Text('Change Password'),
                   ),
                 ),
-                SizedBox(height: 10),
-                Text(errorMessage, style: TextStyle(color: Colors.red)),
-                SizedBox(height: 20),
               ],
             ),
           ),
