@@ -1,8 +1,10 @@
+import 'package:demo/data/constants.dart';
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/pages/register_page.dart';
 import 'package:demo/views/widget_tree.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
@@ -19,6 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   String errorMessage = ' ';
+  bool showPassWord = false;
+
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -26,6 +30,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void login() async {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      setState(() {
+        errorMessage = "Email and Password can't be empty";
+      });
+      return;
+    }
     try {
       await authServices.value.signIn(
         email: _emailController.text,
@@ -47,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     } on FirebaseAuthException catch (error) {
+      print(error.code);
       setState(() {
         errorMessage = error.message ?? "Login failed!";
       });
@@ -65,14 +76,20 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Lottie.asset('assets/lotties/login.json'),
+
+                // Email
                 TextField(
                   controller: _emailController,
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     hintText: 'Email',
@@ -83,20 +100,22 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
+
+                // Password
                 TextField(
                   controller: _passwordController,
-                  obscureText: true,
+                  obscureText: !showPassWord,
                   style: TextStyle(
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: isDarkMode.value
-                            ? Color(0XFF1b4965)
-                            : Color(0XFFeaf4f4),
-                      ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     hintText: 'Password',
@@ -107,7 +126,60 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   inputFormatters: [LengthLimitingTextInputFormatter(20)],
                 ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    // Show Password
+                    Row(
+                      children: [
+                        Checkbox(
+                          activeColor: Color(0XFFc0fdff),
+                          checkColor: Colors.black,
+                          value: showPassWord,
+                          onChanged: (value) {
+                            setState(() {
+                              showPassWord = !showPassWord;
+                            });
+                          },
+                        ),
+                        Text(
+                          'Show password',
+                          style: TextStyle(
+                            color: (isDarkMode.value
+                                ? Colors.white
+                                : Colors.black),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    // Forgot password
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        minimumSize: Size(0, 0),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 0,
+                          horizontal: 10,
+                        ),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: Text(
+                        'Forgot password?',
+                        style: TextStyle(color: Colors.blue.shade300),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+
+                // Error Message
+                Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 30),
+
+                // Login Button
                 SizedBox(
                   height: 60,
                   child: FilledButton(
@@ -124,8 +196,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text(errorMessage, style: TextStyle(color: Colors.red)),
-                SizedBox(height: 20),
+
+                // Dont have account
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -158,12 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       child: Text(
                         'Sign up',
-                        style: TextStyle(
-                          color: Colors.blue.shade300,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.blue.shade300,
-                          decorationThickness: 2,
-                        ),
+                        style: TextStyle(color: Colors.blue.shade300),
                       ),
                     ),
                   ],

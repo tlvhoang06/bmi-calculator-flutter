@@ -1,3 +1,4 @@
+import 'package:demo/data/constants.dart';
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/widget_tree.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,6 +29,18 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void register() async {
+    if(_emailController.text.isEmpty || _passwordController.text.isEmpty){
+      setState(() {
+        errorMessage = "Email and Password can't be empty";
+      });
+      return;
+    }
+    if (_passwordController.text != _confirmPassWordController.text) {
+      setState(() {
+        errorMessage = "Password does not match";
+      });
+      return;
+    }
     try {
       await authServices.value.createAccount(
         email: _emailController.text,
@@ -67,8 +80,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     hintText: 'Display Name',
@@ -88,8 +105,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     hintText: 'Email',
@@ -109,8 +130,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     hintText: 'Password',
@@ -131,8 +156,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: isDarkMode.value ? Colors.white : Colors.black,
                   ),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0XFF1b4965)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     hintText: 'Confirm Password',
@@ -153,14 +182,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 60,
                   child: FilledButton(
                     onPressed: () {
-                      if (_passwordController.text ==
-                          _confirmPassWordController.text) {
-                        register();
-                      } else {
-                        setState(() {
-                          errorMessage = "Password does not match";
-                        });
-                      }
+                      register();
                     },
                     style: FilledButton.styleFrom(
                       elevation: 3,
@@ -199,9 +221,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         'Login',
                         style: TextStyle(
                           color: Colors.blue.shade300,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.blue.shade300,
-                          decorationThickness: 2,
                         ),
                       ),
                     ),
