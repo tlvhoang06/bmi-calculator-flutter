@@ -1,6 +1,7 @@
 import 'package:demo/data/constants.dart';
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/widget_tree.dart';
+import 'package:demo/views/widgets/customized_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPassWordController = TextEditingController();
   String errorMessage = ' ';
+  bool showPassWord = false;
   final formKey = GlobalKey<FormState>();
   void dispose() {
     _nameController.dispose();
@@ -46,6 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
+      if(!mounted)  return;
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -74,110 +77,46 @@ class _RegisterPageState extends State<RegisterPage> {
                 Lottie.asset('assets/lotties/login.json'),
 
                 // Display Name
-                TextField(
-                  controller: _nameController,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Display Name',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                ),
+                CustomizedTextfield(controller: _nameController, hintText: "Display Name", hideText: false,),
                 SizedBox(height: 15),
 
                 // Email
-                TextField(
-                  controller: _emailController,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Email',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                ),
+                CustomizedTextfield(controller: _emailController, hintText: "Email", hideText: false,),
                 SizedBox(height: 15),
 
                 // Password
-                TextField(
-                  controller: _passwordController,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Password',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                  obscureText: true, // hide text
-                ),
+                CustomizedTextfield(controller: _passwordController, hintText: "Password", hideText: !showPassWord),
                 SizedBox(height: 15),
 
                 // Confirm Password
-                TextField(
-                  controller: _confirmPassWordController,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Confirm Password',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                  obscureText: true, // hide text
-                ),
+                CustomizedTextfield(controller: _confirmPassWordController, hintText: "Confirm Password", hideText: !showPassWord),
 
                 SizedBox(height: 10),
                 Text(errorMessage, style: TextStyle(color: Colors.red)),
-                SizedBox(height: 30),
-
+                SizedBox(height: 5),
+                Row(
+                      children: [
+                        Checkbox(
+                          activeColor: Color(0XFFc0fdff),
+                          checkColor: Colors.black,
+                          value: showPassWord,
+                          onChanged: (value) {
+                            setState(() {
+                              showPassWord = !showPassWord;
+                            });
+                          },
+                        ),
+                        Text(
+                          'Show password',
+                          style: TextStyle(
+                            color: (isDarkMode.value
+                                ? Colors.white
+                                : Colors.black),
+                          ),
+                        ),
+                      ],
+                    ),
+                SizedBox(height: 10),
                 SizedBox(
                   height: 60,
                   child: FilledButton(

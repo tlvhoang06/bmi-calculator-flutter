@@ -2,6 +2,8 @@ import 'package:demo/data/constants.dart';
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/pages/register_page.dart';
 import 'package:demo/views/widget_tree.dart';
+import 'package:demo/views/widgets/auth_button.dart';
+import 'package:demo/views/widgets/customized_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -21,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   String errorMessage = ' ';
-  bool showPassWord = false;
+  bool showPassWord = true;
 
   void dispose() {
     _emailController.dispose();
@@ -41,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Logged in as ${name}'),
@@ -78,59 +81,23 @@ class _LoginPageState extends State<LoginPage> {
                 Lottie.asset('assets/lotties/login.json'),
 
                 // Email
-                TextField(
+                CustomizedTextfield(
                   controller: _emailController,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Email',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
+                  hintText: "Email",
+                  hideText: false,
                 ),
                 SizedBox(height: 15),
 
                 // Password
-                TextField(
+                CustomizedTextfield(
                   controller: _passwordController,
-                  obscureText: !showPassWord,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(focusTextFieldColor)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Password',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
+                  hintText: "Password",
+                  hideText: showPassWord,
                 ),
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
                     // Show Password
                     Row(
                       children: [
@@ -180,21 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 30),
 
                 // Login Button
-                SizedBox(
-                  height: 60,
-                  child: FilledButton(
-                    onPressed: () {
-                      login();
-                    },
-                    style: FilledButton.styleFrom(
-                      elevation: 3,
-                      minimumSize: Size(double.infinity, 40),
-                      backgroundColor: Color(0XFFc0fdff),
-                      foregroundColor: Colors.black,
-                    ),
-                    child: Text('Login'),
-                  ),
-                ),
+                AuthButton(action: login, buttonText: "Login"),
                 SizedBox(height: 10),
 
                 // Dont have account

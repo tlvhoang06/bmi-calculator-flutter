@@ -12,16 +12,20 @@ class AuthGate extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: authServices,
       builder: (context, value, child) {
-        return StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(), builder: (context, snapshot) {
-          if(snapshot.connectionState == ConnectionState.waiting){   // spinner
-            return Scaffold(body: Center(child: CircularProgressIndicator()));
-          }
-          else if(snapshot.hasData){  // user logged in
-            return WidgetTree();
-          }
-          return LoginPage();   // user not logged in
-        },);
-      }
+        return StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // spinner
+              return Scaffold(body: Center(child: CircularProgressIndicator()));
+            } else if (snapshot.hasData) {
+              // user logged in
+              return WidgetTree();
+            }
+            return LoginPage(); // user not logged in
+          },
+        );
+      },
     );
   }
 }

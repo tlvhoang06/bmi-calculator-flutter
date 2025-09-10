@@ -1,4 +1,6 @@
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/widgets/auth_button.dart';
+import 'package:demo/views/widgets/customized_textfield.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -75,110 +77,23 @@ class _ManagePasswordPageState extends State<ChangePassword> {
                   width: 300,
                 ),
                 SizedBox(height: 70),
-                TextField(
-                  controller: _emailController,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0XFF1b4965)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Email',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                ),
+
+                // Email
+                CustomizedTextfield(controller: _emailController, hintText: "Email", hideText: false),
                 SizedBox(height: 10),
-                TextField(
-                  controller: _currentPassWordController,
-                  obscureText: true,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: isDarkMode.value
-                            ? Color(0XFF1b4965)
-                            : Color(0XFFeaf4f4),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Curent password',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                ),
+
+                // Current Password
+                CustomizedTextfield(controller: _currentPassWordController, hintText: "Current Password", hideText: true),
                 SizedBox(height: 10),
-                TextField(
-                  controller: _newPassWordController,
-                  obscureText: true,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: isDarkMode.value
-                            ? Color(0XFF1b4965)
-                            : Color(0XFFeaf4f4),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'New password',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                ),
+
+                // New Password
+                CustomizedTextfield(controller: _newPassWordController, hintText: "New Password", hideText: true),
                 SizedBox(height: 10),
-                TextField(
-                  controller: _confirmPassWordController,
-                  style: TextStyle(
-                    color: isDarkMode.value ? Colors.white : Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0XFF1b4965)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Confirm Password',
-                    hintStyle: TextStyle(
-                      color: (isDarkMode.value ? Colors.white : Colors.black),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 30),
-                  ),
-                  inputFormatters: [LengthLimitingTextInputFormatter(20)],
-                  obscureText: true, // hide text
-                ),
+                CustomizedTextfield(controller: _confirmPassWordController, hintText: "Confirm Password", hideText: true),
                 SizedBox(height: 10),
                 Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 30),
-                SizedBox(
-                  height: 60,
-                  child: FilledButton(
-                    onPressed: () {
-                      changePassword();
-                    },
-                    style: FilledButton.styleFrom(
-                      elevation: 3,
-                      minimumSize: Size(double.infinity, 40),
-                      backgroundColor: Color(0XFFc0fdff),
-                      foregroundColor: Colors.black,
-                    ),
-                    child: Text('Change Password'),
-                  ),
-                ),
+                AuthButton(action: changePassword, buttonText: "Change Password")
               ],
             ),
           ),
