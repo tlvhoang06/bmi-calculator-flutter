@@ -1,6 +1,6 @@
-import 'package:demo/data/constants.dart';
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/widget_tree.dart';
+import 'package:demo/views/widgets/auth_button.dart';
 import 'package:demo/views/widgets/customized_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPassWordController = TextEditingController();
-  String errorMessage = ' ';
+  String errorMessage = '';
   bool showPassWord = false;
   final formKey = GlobalKey<FormState>();
   void dispose() {
@@ -31,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void register() async {
-    if(_emailController.text.isEmpty || _passwordController.text.isEmpty){
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
       setState(() {
         errorMessage = "Email and Password can't be empty";
       });
@@ -48,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      if(!mounted)  return;
+      if (!mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -77,61 +77,62 @@ class _RegisterPageState extends State<RegisterPage> {
                 Lottie.asset('assets/lotties/login.json'),
 
                 // Display Name
-                CustomizedTextfield(controller: _nameController, hintText: "Display Name", hideText: false,),
+                CustomizedTextfield(
+                  controller: _nameController,
+                  hintText: "Display Name",
+                  hideText: false,
+                ),
                 SizedBox(height: 15),
 
                 // Email
-                CustomizedTextfield(controller: _emailController, hintText: "Email", hideText: false,),
+                CustomizedTextfield(
+                  controller: _emailController,
+                  hintText: "Email",
+                  hideText: false,
+                ),
                 SizedBox(height: 15),
 
                 // Password
-                CustomizedTextfield(controller: _passwordController, hintText: "Password", hideText: !showPassWord),
+                CustomizedTextfield(
+                  controller: _passwordController,
+                  hintText: "Password",
+                  hideText: !showPassWord,
+                ),
                 SizedBox(height: 15),
 
                 // Confirm Password
-                CustomizedTextfield(controller: _confirmPassWordController, hintText: "Confirm Password", hideText: !showPassWord),
+                CustomizedTextfield(
+                  controller: _confirmPassWordController,
+                  hintText: "Confirm Password",
+                  hideText: !showPassWord,
+                ),
 
                 SizedBox(height: 10),
-                Text(errorMessage, style: TextStyle(color: Colors.red)),
+                if (errorMessage.isNotEmpty)
+                  Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 5),
                 Row(
-                      children: [
-                        Checkbox(
-                          activeColor: Color(0XFFc0fdff),
-                          checkColor: Colors.black,
-                          value: showPassWord,
-                          onChanged: (value) {
-                            setState(() {
-                              showPassWord = !showPassWord;
-                            });
-                          },
-                        ),
-                        Text(
-                          'Show password',
-                          style: TextStyle(
-                            color: (isDarkMode.value
-                                ? Colors.white
-                                : Colors.black),
-                          ),
-                        ),
-                      ],
+                  children: [
+                    Checkbox(
+                      activeColor: Color(0XFFc0fdff),
+                      checkColor: Colors.black,
+                      value: showPassWord,
+                      onChanged: (value) {
+                        setState(() {
+                          showPassWord = !showPassWord;
+                        });
+                      },
                     ),
-                SizedBox(height: 10),
-                SizedBox(
-                  height: 60,
-                  child: FilledButton(
-                    onPressed: () {
-                      register();
-                    },
-                    style: FilledButton.styleFrom(
-                      elevation: 3,
-                      minimumSize: Size(double.infinity, 40),
-                      backgroundColor: Color(0XFFc0fdff),
-                      foregroundColor: Colors.black,
+                    Text(
+                      'Show password',
+                      style: TextStyle(
+                        color: (isDarkMode.value ? Colors.white : Colors.black),
+                      ),
                     ),
-                    child: Text('Sign up'),
-                  ),
+                  ],
                 ),
+                SizedBox(height: 10),
+                AuthButton(action: register, buttonText: "Sign up"),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -158,9 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       child: Text(
                         'Login',
-                        style: TextStyle(
-                          color: Colors.blue.shade300,
-                        ),
+                        style: TextStyle(color: Colors.blue.shade300),
                       ),
                     ),
                   ],

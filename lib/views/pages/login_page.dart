@@ -1,13 +1,11 @@
-import 'package:demo/data/constants.dart';
 import 'package:demo/data/notifer.dart';
+import 'package:demo/views/pages/forget_password.dart';
 import 'package:demo/views/pages/register_page.dart';
 import 'package:demo/views/widget_tree.dart';
 import 'package:demo/views/widgets/auth_button.dart';
 import 'package:demo/views/widgets/customized_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,10 +18,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = 'Truong Le Vu Hoang';
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  String errorMessage = ' ';
-  bool showPassWord = true;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String errorMessage = '';
+  bool showPassWord = false;
 
   void dispose() {
     _emailController.dispose();
@@ -61,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
       );
     } on FirebaseAuthException catch (error) {
       print(error.code);
+      print("❌ LOGIN ERROR -> code: ${error.code}, message: ${error.message}");
       setState(() {
         errorMessage = error.message ?? "Login failed!";
       });
@@ -92,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 CustomizedTextfield(
                   controller: _passwordController,
                   hintText: "Password",
-                  hideText: showPassWord,
+                  hideText: !showPassWord,
                 ),
                 SizedBox(height: 10),
                 Row(
@@ -124,7 +123,16 @@ class _LoginPageState extends State<LoginPage> {
 
                     // Forgot password
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SendPasswordResetEmail();
+                            },
+                          ),
+                        );
+                      },
                       style: TextButton.styleFrom(
                         minimumSize: Size(0, 0),
                         padding: EdgeInsets.symmetric(
@@ -143,7 +151,8 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 10),
 
                 // Error Message
-                Text(errorMessage, style: TextStyle(color: Colors.red)),
+                if (errorMessage.isNotEmpty)
+                    Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 30),
 
                 // Login Button

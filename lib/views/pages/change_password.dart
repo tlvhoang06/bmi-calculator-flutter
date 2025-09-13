@@ -3,8 +3,6 @@ import 'package:demo/views/widgets/auth_button.dart';
 import 'package:demo/views/widgets/customized_textfield.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:lottie/lottie.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
@@ -14,12 +12,13 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ManagePasswordPageState extends State<ChangePassword> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _currentPassWordController = TextEditingController();
-  TextEditingController _newPassWordController = TextEditingController();
-  TextEditingController _confirmPassWordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _currentPassWordController =
+      TextEditingController();
+  final TextEditingController _newPassWordController = TextEditingController();
+  final TextEditingController _confirmPassWordController =
+      TextEditingController();
   String errorMessage = ' ';
-  final formKey = GlobalKey<FormState>();
   void dispose() {
     _emailController.dispose();
     _currentPassWordController.dispose();
@@ -27,10 +26,11 @@ class _ManagePasswordPageState extends State<ChangePassword> {
     _confirmPassWordController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     void changePassword() async {
-      if(_newPassWordController.text != _confirmPassWordController.text){
+      if (_newPassWordController.text != _confirmPassWordController.text) {
         setState(() {
           errorMessage = "Password does not match";
         });
@@ -79,21 +79,44 @@ class _ManagePasswordPageState extends State<ChangePassword> {
                 SizedBox(height: 70),
 
                 // Email
-                CustomizedTextfield(controller: _emailController, hintText: "Email", hideText: false),
+                CustomizedTextfield(
+                  controller: _emailController,
+                  hintText: "Email",
+                  hideText: false,
+                ),
                 SizedBox(height: 10),
 
                 // Current Password
-                CustomizedTextfield(controller: _currentPassWordController, hintText: "Current Password", hideText: true),
+                CustomizedTextfield(
+                  controller: _currentPassWordController,
+                  hintText: "Current Password",
+                  hideText: true,
+                ),
                 SizedBox(height: 10),
 
                 // New Password
-                CustomizedTextfield(controller: _newPassWordController, hintText: "New Password", hideText: true),
+                CustomizedTextfield(
+                  controller: _newPassWordController,
+                  hintText: "New Password",
+                  hideText: true,
+                ),
                 SizedBox(height: 10),
-                CustomizedTextfield(controller: _confirmPassWordController, hintText: "Confirm Password", hideText: true),
+
+                // Confirm New Password
+                CustomizedTextfield(
+                  controller: _confirmPassWordController,
+                  hintText: "Confirm Password",
+                  hideText: true,
+                ),
                 SizedBox(height: 10),
-                Text(errorMessage, style: TextStyle(color: Colors.red)),
+                
+                if (errorMessage.isNotEmpty)
+                  Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 30),
-                AuthButton(action: changePassword, buttonText: "Change Password")
+                AuthButton(
+                  action: changePassword,
+                  buttonText: "Change Password",
+                ),
               ],
             ),
           ),
