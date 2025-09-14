@@ -12,7 +12,7 @@ class AuthButton extends StatelessWidget {
       height: 60,
       child: FilledButton(
         onPressed: () {
-          action;
+          action();
         },
         style: FilledButton.styleFrom(
           elevation: 3,
