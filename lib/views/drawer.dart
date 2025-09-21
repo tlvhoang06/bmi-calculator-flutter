@@ -95,19 +95,7 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           Divider(color: Colors.grey, indent: 16, endIndent: 16),
-          InkWell(
-            onTap: () {
-              showConfirmDialog(
-                title: "Confirm Logout",
-                content: "Are you sure you want to log out?",
-                context: context,
-                onConfirm: logOut,
-              );
-            },
-            splashColor: Colors.grey.shade100,
-            child: ListTile(title: Text('Log out')),
-          ),
-          Divider(color: Colors.grey, indent: 16, endIndent: 16),
+
           InkWell(
             onTap: () {
               Navigator.push(
@@ -122,6 +110,21 @@ class MyDrawer extends StatelessWidget {
             splashColor: Colors.grey.shade100,
             child: ListTile(title: Text('Change password')),
           ),
+          Divider(color: Colors.grey, indent: 16, endIndent: 16),
+
+          InkWell(
+            onTap: () {
+              showConfirmDialog(
+                title: "Confirm Logout",
+                content: "Are you sure you want to log out?",
+                context: context,
+                onConfirm: logOut,
+              );
+            },
+            splashColor: Colors.grey.shade100,
+            child: ListTile(title: Text('Log out')),
+          ),
+          
         ],
       ),
     );

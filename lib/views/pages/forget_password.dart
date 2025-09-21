@@ -48,7 +48,7 @@ class _SendPasswordResetEmailState extends State<SendPasswordResetEmail> {
       backgroundColor: isDarkMode.value ? Color(0XFF0d1b2a) : Color(0XFFedeec9),
       appBar: AppBar(
         backgroundColor: Color(0XFFc0fdff),
-        title: Text("C H A N G E   P A S S W O R D"),
+        title: Text("R E S E T   P A S S W O R D"),
         centerTitle: true,
       ),
       body: Center(
@@ -59,7 +59,7 @@ class _SendPasswordResetEmailState extends State<SendPasswordResetEmail> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/security_icon.png',
+                  'assets/images/email_icon.png',
                   height: 300,
                   width: 300,
                 ),

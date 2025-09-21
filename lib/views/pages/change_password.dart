@@ -13,11 +13,9 @@ class ChangePassword extends StatefulWidget {
 
 class _ManagePasswordPageState extends State<ChangePassword> {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _currentPassWordController =
-      TextEditingController();
+  final TextEditingController _currentPassWordController = TextEditingController();
   final TextEditingController _newPassWordController = TextEditingController();
-  final TextEditingController _confirmPassWordController =
-      TextEditingController();
+  final TextEditingController _confirmPassWordController = TextEditingController();
   String errorMessage = ' ';
   void dispose() {
     _emailController.dispose();
@@ -109,7 +107,7 @@ class _ManagePasswordPageState extends State<ChangePassword> {
                   hideText: true,
                 ),
                 SizedBox(height: 10),
-                
+
                 if (errorMessage.isNotEmpty)
                   Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 30),

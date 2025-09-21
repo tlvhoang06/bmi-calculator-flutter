@@ -4,7 +4,6 @@ import 'package:demo/views/widgets/auth_button.dart';
 import 'package:demo/views/widgets/customized_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 class RegisterPage extends StatefulWidget {
