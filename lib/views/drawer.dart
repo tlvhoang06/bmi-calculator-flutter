@@ -1,3 +1,4 @@
+import 'package:demo/data/current_user_data.dart';
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/functions/confirm_dialog_function.dart';
 import 'package:demo/views/pages/change_password.dart';
@@ -49,17 +50,22 @@ class MyDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 30, bottom: 15, left: 15),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       foregroundColor: Colors.black,
                       backgroundColor: Color(0XFF48bfe3).withOpacity(0.2),
-                      child: Icon(Icons.person_3_outlined),
+                      child: Icon(Icons.person_2_outlined),
                     ),
                     SizedBox(width: 10),
                     Text(
-                      'Truong Le Vu Hoang',
+                      curentUserData().displayName,
                       style: TextStyle(fontWeight: FontWeight.bold),
-                    ), // temp
+                    ),
+                    SizedBox(width: 10),
+                    IconButton(onPressed: () {
+                      
+                    }, icon: Icon(Icons.edit, size: 20))
                   ],
                 ),
               ),

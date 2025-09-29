@@ -47,6 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
+      await authServices.value.updateUserName(username: _nameController.text);
       if (!mounted) return;
       Navigator.push(
         context,

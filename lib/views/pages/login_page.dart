@@ -1,3 +1,4 @@
+import 'package:demo/data/current_user_data.dart';
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/pages/forget_password.dart';
 import 'package:demo/views/pages/register_page.dart';
@@ -16,8 +17,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String name = 'Truong Le Vu Hoang';
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String errorMessage = '';
@@ -44,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Logged in as ${name}'),
+          content: Text('Logged in as ${curentUserData().displayName}'),
           duration: Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
         ),

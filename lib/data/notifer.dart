@@ -1,4 +1,5 @@
 import 'package:demo/services/auth_service.dart';
+import 'package:demo/services/database_service.dart';
 import 'package:flutter/material.dart';
 
 ValueNotifier<bool> isDarkMode = ValueNotifier(false);
@@ -11,3 +12,6 @@ ValueNotifier<double> bmi = ValueNotifier(0);
 
 // Auth Services
 ValueNotifier<AuthService> authServices = ValueNotifier(AuthService());
+
+// Database Services
+ValueNotifier<DatabaseService> databaseServices = ValueNotifier(DatabaseService());

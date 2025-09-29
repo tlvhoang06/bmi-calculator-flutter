@@ -1,0 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+class curentUserData{
+  User? get user => FirebaseAuth.instance.currentUser;
+  String get displayName{
+    if(user == null){
+      return "Guest";
+    }
+    return user!.displayName ?? user!.email ?? "User";
+  }
+}
