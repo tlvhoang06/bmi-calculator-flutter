@@ -1,6 +1,7 @@
 import 'package:demo/data/current_user_data.dart';
 import 'package:demo/data/notifer.dart';
-import 'package:demo/views/functions/confirm_dialog_function.dart';
+import 'package:demo/views/functions/confirm_dialog.dart';
+import 'package:demo/views/functions/textfield_dialog.dart';
 import 'package:demo/views/pages/change_password.dart';
 import 'package:demo/views/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,9 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:demo/data/constants.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
 
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     void popPage() {
@@ -63,9 +69,23 @@ class MyDrawer extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: 10),
-                    IconButton(onPressed: () {
-                      
-                    }, icon: Icon(Icons.edit, size: 20))
+                    IconButton(
+                      onPressed: () {
+                        showTextFieldDialog(
+                          context: context,
+                          title: "Change Username",
+                          onConfirm: (newName) async {
+                            await authServices.value.updateUserName(
+                              username: newName,
+                            );
+                            setState(() {
+                              
+                            });
+                          },
+                        );
+                      },
+                      icon: Icon(Icons.edit, size: 20),
+                    ),
                   ],
                 ),
               ),
@@ -130,7 +150,6 @@ class MyDrawer extends StatelessWidget {
             splashColor: Colors.grey.shade100,
             child: ListTile(title: Text('Log out')),
           ),
-          
         ],
       ),
     );
