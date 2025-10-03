@@ -11,6 +11,7 @@ class DatabaseService {
         "result": result,
         "time": FieldValue.serverTimestamp(),
       });
+      
     } catch (e) {
       print(e);
     }

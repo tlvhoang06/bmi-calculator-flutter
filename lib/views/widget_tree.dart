@@ -23,7 +23,7 @@ class WidgetTree extends StatelessWidget {
             return Text(
               (pageIndex == 0)
                   ? 'B M I   C A L C U L A T O R'
-                  : 'H I S T O R Y',
+                  : 'L A T E S T   R E S U L T S',
               style: TextStyle(
                 shadows: [
                   Shadow(

@@ -65,7 +65,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      curentUserData().displayName,
+                      currentUserData().displayName,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: 10),

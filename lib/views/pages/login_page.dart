@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Logged in as ${curentUserData().displayName}'),
+          content: Text('Logged in as ${currentUserData().displayName}'),
           duration: Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
         ),
