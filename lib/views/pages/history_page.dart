@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/data/constants.dart';
-import 'package:demo/data/notifer.dart';
 import 'package:demo/data/current_user_data.dart';
 import 'package:demo/services/database_service.dart';
 import 'package:demo/views/functions/app_function.dart';
@@ -54,7 +53,7 @@ class HistoryPage extends StatelessWidget {
                             Icon(Icons.person, color: Colors.white, size: 28),
                             SizedBox(width: 5),
                             Text(
-                              currentUserData().displayName,
+                              CurrentUserData().displayName,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -64,7 +63,7 @@ class HistoryPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Text(currentUserData().user!.email!),
+                        Text(CurrentUserData().user!.email!),
                       ],
                     ),
                   ),
@@ -104,7 +103,7 @@ class HistoryPage extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(width: 50),
+                              SizedBox(width: 30),
                               Text(
                                 Result(data['result']),
                                 style: TextStyle(
@@ -117,7 +116,9 @@ class HistoryPage extends StatelessWidget {
                           ),
                           subtitle: Text(date, style: TextStyle(fontSize: 12)),
                           trailing: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              DatabaseService().deleteResult(docs[index].id);
+                            },
                             icon: Icon(Icons.delete_outline, size: 32),
                           ),
                         ),

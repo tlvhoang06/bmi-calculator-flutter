@@ -11,7 +11,6 @@ class DatabaseService {
         "result": result,
         "time": FieldValue.serverTimestamp(),
       });
-      
     } catch (e) {
       print(e);
     }
@@ -22,6 +21,20 @@ class DatabaseService {
         .collection("user")
         .doc(uid)
         .collection("bmiResults")
+        .orderBy('time', descending: true)
         .snapshots();
+  }
+
+  Future<void> deleteResult(String docID) async {
+    try {
+      await firestore
+          .collection("user")
+          .doc(uid)
+          .collection("bmiResults")
+          .doc(docID)
+          .delete();
+    } catch (e) {
+      print(e);
+    }
   }
 }

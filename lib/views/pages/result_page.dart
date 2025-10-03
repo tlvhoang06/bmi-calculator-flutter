@@ -1,4 +1,3 @@
-
 import 'package:demo/data/notifer.dart';
 import 'package:demo/services/database_service.dart';
 import 'package:demo/views/widgets/buttons/action_buttons.dart';
@@ -62,8 +61,19 @@ class ResultPage extends StatelessWidget {
                         radius: 22,
                         height: 100,
                         width: 180,
-                        action: () async{
+                        action: () async {
                           await DatabaseService().saveResult(bmi.value);
+                          final snapshot = await DatabaseService().firestore
+                              .collection("user")
+                              .doc(DatabaseService().uid)
+                              .collection("bmiResults")
+                              .orderBy("time")
+                              .get();
+                          if (snapshot.docs.length > 15) {
+                            await DatabaseService().deleteResult(
+                              snapshot.docs.first.id,
+                            );
+                          }
                         },
                       ),
                     ],
