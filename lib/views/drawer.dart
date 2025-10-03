@@ -78,9 +78,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             await authServices.value.updateUserName(
                               username: newName,
                             );
-                            setState(() {
-                              
-                            });
+                            setState(() {});
                           },
                         );
                       },

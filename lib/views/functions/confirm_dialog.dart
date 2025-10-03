@@ -10,7 +10,7 @@ Future<void> showConfirmDialog({
     context: context,
     builder: (context) {
       return AlertDialog(
-        surfaceTintColor: Colors.black,
+        surfaceTintColor: Colors.blue.shade100,
         actionsAlignment: MainAxisAlignment.spaceBetween,
         actionsPadding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
         shape: RoundedRectangleBorder(

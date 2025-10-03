@@ -3,7 +3,7 @@ import 'package:demo/data/notifer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CustomizedTextfield extends StatelessWidget {
+class CustomizedTextfield extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final bool hideText;
@@ -15,9 +15,14 @@ class CustomizedTextfield extends StatelessWidget {
   });
 
   @override
+  State<CustomizedTextfield> createState() => _CustomizedTextfieldState();
+}
+
+class _CustomizedTextfieldState extends State<CustomizedTextfield> {
+  @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
+      controller: widget.controller,
       style: TextStyle(color: isDarkMode.value ? Colors.white : Colors.black),
       cursorColor: Color(primaryColor),
       decoration: InputDecoration(
@@ -29,14 +34,15 @@ class CustomizedTextfield extends StatelessWidget {
           borderSide: BorderSide(color: Color(primaryColor)),
           borderRadius: BorderRadius.circular(12),
         ),
-        hintText: hintText,
+        hintText: widget.hintText,
         hintStyle: TextStyle(
           color: (isDarkMode.value ? Colors.white : Colors.black),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 30),
       ),
       inputFormatters: [LengthLimitingTextInputFormatter(20)],
-      obscureText: hideText,
+      obscureText: widget.hideText,
+      onChanged: (value) => setState(() {}),
     );
   }
 }
