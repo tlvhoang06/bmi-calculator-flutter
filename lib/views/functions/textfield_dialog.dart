@@ -1,6 +1,6 @@
 import 'package:demo/data/notifer.dart';
 import 'package:flutter/material.dart';
-import 'package:demo/views/widgets/customized_textfield.dart';
+import 'package:demo/views/widgets/textfields/customized_textfield.dart';
 
 Future<void> showTextFieldDialog({
   required BuildContext context,

@@ -2,7 +2,7 @@ import 'package:demo/data/notifer.dart';
 import 'package:demo/views/pages/bmi_page.dart';
 import 'package:demo/views/pages/history_page.dart';
 import 'package:demo/views/drawer.dart';
-import 'package:demo/views/widgets/navbar_widget.dart';
+import 'package:demo/views/navbar.dart';
 import 'package:flutter/material.dart';
 
 List<Widget> pages = [BmiPage(), HistoryPage()];
@@ -40,7 +40,7 @@ class WidgetTree extends StatelessWidget {
         actions: [SizedBox(width: 10.0)],
       ),
       drawer: MyDrawer(),
-      bottomNavigationBar: NavbarWidget(),
+      bottomNavigationBar: NavBar(),
       body: ValueListenableBuilder(
         valueListenable: selectedPage,
         builder: (context, pageIndex, child) {

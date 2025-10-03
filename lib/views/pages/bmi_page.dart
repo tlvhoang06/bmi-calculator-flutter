@@ -3,9 +3,9 @@ import 'package:demo/views/functions/app_function.dart';
 import 'package:demo/views/pages/result_page.dart';
 import 'package:demo/views/widgets/gender_select.dart';
 import 'package:demo/views/widgets/height_slider.dart';
-import 'package:demo/views/widgets/increment_decrement_buttons.dart';
+import 'package:demo/views/widgets/buttons/increment_decrement_buttons.dart';
 import 'package:demo/views/widgets/stat_card.dart';
-import 'package:demo/views/widgets/text_type_box.dart';
+import 'package:demo/views/widgets/textfields/text_type_box.dart';
 import 'package:flutter/material.dart';
 
 class BmiPage extends StatelessWidget {

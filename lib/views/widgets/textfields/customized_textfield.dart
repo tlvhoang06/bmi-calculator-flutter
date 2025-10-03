@@ -13,7 +13,6 @@ class CustomizedTextfield extends StatefulWidget {
     required this.hintText,
     required this.hideText,
   });
-
   @override
   State<CustomizedTextfield> createState() => _CustomizedTextfieldState();
 }

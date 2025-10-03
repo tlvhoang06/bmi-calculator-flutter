@@ -1,7 +1,7 @@
 import 'package:demo/data/notifer.dart';
 import 'package:demo/views/widget_tree.dart';
-import 'package:demo/views/widgets/auth_button.dart';
-import 'package:demo/views/widgets/customized_textfield.dart';
+import 'package:demo/views/widgets/buttons/auth_button.dart';
+import 'package:demo/views/widgets/textfields/customized_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

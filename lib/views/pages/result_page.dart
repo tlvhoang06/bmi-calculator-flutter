@@ -1,7 +1,8 @@
 
 import 'package:demo/data/notifer.dart';
-import 'package:demo/views/widgets/action_buttons.dart';
-import 'package:demo/views/widgets/stat_attempt.dart';
+import 'package:demo/services/database_service.dart';
+import 'package:demo/views/widgets/buttons/action_buttons.dart';
+import 'package:demo/views/functions/stat_attempt.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/views/widgets/gauge_chart.dart';
 
@@ -61,8 +62,8 @@ class ResultPage extends StatelessWidget {
                         radius: 22,
                         height: 100,
                         width: 180,
-                        action: () {
-                          Navigator.pop(context);
+                        action: () async{
+                          await DatabaseService().saveResult(bmi.value);
                         },
                       ),
                     ],
