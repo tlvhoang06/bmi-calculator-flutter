@@ -29,7 +29,11 @@ class HistoryPage extends StatelessWidget {
             return Center(
               child: Text(
                 "No results yet",
-                style: TextStyle(color: Color(0XFFc0fdff), fontSize: 20),
+                style: TextStyle(
+                  color: Color(primaryColor),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             );
           }
@@ -103,12 +107,12 @@ class HistoryPage extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(width: 30),
+                              SizedBox(width: 50),
                               Text(
-                                Result(data['result']),
+                                Status(data['result']),
                                 style: TextStyle(
                                   color: StatusColor(data['result']),
-                                  fontSize: 22,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

@@ -9,7 +9,7 @@ void CalculateBMI() {
 }
 
 // Status
-String Result(double bmi) {
+String Status(double bmi) {
   String res;
   if (bmi <= 18.4) {
     res = "Underweight";

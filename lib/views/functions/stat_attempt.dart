@@ -20,7 +20,7 @@ class StatusAndAttempt extends StatelessWidget {
           children: [
             SizedBox(height: 15),
             Text(
-              Result(bmi.value),
+              Status(bmi.value),
               style: TextStyle(
                 color: StatusColor(bmi.value),
                 fontSize: 40,
