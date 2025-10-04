@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class CurrentUserData{
   User? get user => FirebaseAuth.instance.currentUser;

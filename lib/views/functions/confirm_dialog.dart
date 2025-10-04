@@ -18,7 +18,7 @@ Future<void> showConfirmDialog({
         ),
         title: Align(child: Text(title)),
         content: SizedBox(
-          height: 30,
+          height: 40,
           width: 300,
           child: Align(child: Text(content)),
         ),

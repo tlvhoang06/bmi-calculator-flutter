@@ -5,15 +5,16 @@ import 'package:demo/views/widgets/textfields/customized_textfield.dart';
 Future<void> showTextFieldDialog({
   required BuildContext context,
   required String title,
+  required String hintText,
   required Function(String) onConfirm,
 }) {
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   return showDialog(
     context: context,
     builder: (context) {
       return StatefulBuilder(
         builder: (context, setState) {
-          _nameController.addListener(() {
+          _controller.addListener(() {
             setState(() {});
           });
           return AlertDialog(
@@ -36,9 +37,9 @@ Future<void> showTextFieldDialog({
             ),
             actions: [
               CustomizedTextfield(
-                controller: _nameController,
+                controller: _controller,
                 hideText: false,
-                hintText: "New Username",
+                hintText: hintText,
               ),
               SizedBox(height: 30),
               Row(
@@ -61,16 +62,16 @@ Future<void> showTextFieldDialog({
 
                   // Save
                   TextButton(
-                    onPressed: _nameController.text.isEmpty
+                    onPressed: _controller.text.isEmpty
                         ? null
                         : () {
-                            onConfirm(_nameController.text);
+                            onConfirm(_controller.text);
                             Navigator.pop(context);
                           },
                     child: Text(
-                      'Save',
+                      'Ok',
                       style: TextStyle(
-                        color: _nameController.text.isEmpty
+                        color: _controller.text.isEmpty
                             ? Colors.blueGrey
                             : Colors.blue.shade400,
                         fontWeight: FontWeight.bold,

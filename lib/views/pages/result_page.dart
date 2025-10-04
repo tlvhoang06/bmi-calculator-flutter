@@ -74,6 +74,9 @@ class ResultPage extends StatelessWidget {
                               snapshot.docs.first.id,
                             );
                           }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Saved Result')),
+                          );
                         },
                       ),
                     ],

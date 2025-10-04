@@ -46,6 +46,18 @@ class _MyDrawerState extends State<MyDrawer> {
       ;
     }
 
+    void removeAccount(String password) async {
+      try {
+        User currentUser = CurrentUserData().user!;
+        await authServices.value.deleteAccount(currentUser.email!, password);
+        popPage();
+      } on FirebaseAuthException catch (error) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: ${error.message}')));
+      }
+    }
+
     return Drawer(
       backgroundColor: Color(0XFFe0fbfc),
       child: ListView(
@@ -74,6 +86,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         showTextFieldDialog(
                           context: context,
                           title: "Change Username",
+                          hintText: "New Username",
                           onConfirm: (newName) async {
                             await authServices.value.updateUserName(
                               username: newName,
@@ -135,7 +148,21 @@ class _MyDrawerState extends State<MyDrawer> {
             child: ListTile(title: Text('Change password')),
           ),
           Divider(color: Colors.grey, indent: 16, endIndent: 16),
-
+          InkWell(
+            onTap: () {
+              showTextFieldDialog(
+                title: "Confirm deletion",
+                context: context,
+                hintText: "Enter Password",
+                onConfirm: (password) {
+                  removeAccount(password);
+                },
+              );
+            },
+            splashColor: Colors.grey.shade100,
+            child: ListTile(title: Text('Delete account')),
+          ),
+          Divider(color: Colors.grey, indent: 16, endIndent: 16),
           InkWell(
             onTap: () {
               showConfirmDialog(
