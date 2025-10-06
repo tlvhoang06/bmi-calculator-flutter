@@ -11,7 +11,7 @@ Designed with Firebase Authentication and Firestore Database
 - Instantly calculate your **Body Mass Index (BMI)** based on height and weight.
 
 ### Range Insights
-- View detailed **BMI categories** and understand where you stand (Underweight, Normal, Overweight, or Obese).
+- View detailed **BMI categories** and understand where you stand (Underweight, Normal, Overweight, Obese or Morbidly Obese).
 
 ### Weight Adjustment Guide
 - See **how much weight to gain or lose** to reach the healthy range.
